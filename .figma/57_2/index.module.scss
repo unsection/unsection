@@ -1,0 +1,83 @@
+* {
+  box-sizing: border-box;
+}
+
+.sideNav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-width: 0px 1px 0px 0px;
+  border-style: solid;
+  border-color: #ffffff1a;
+  background: #000000;
+  padding-bottom: 423px;
+  width: 68px;
+  height: 900px;
+  overflow: hidden;
+
+  .navItem2 {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 12px;
+    background: #ffffff00;
+    padding: 8px;
+    overflow: hidden;
+  }
+
+  .brand {
+    width: 68px;
+    height: 68px;
+    overflow: hidden;
+  }
+
+  .menu {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    justify-content: center;
+    margin-right: -1px;
+    margin-left: -1px;
+    padding: 14px;
+    overflow: hidden;
+    row-gap: 16px;
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      overflow: hidden;
+    }
+
+    .navItem {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      align-self: stretch;
+      border-radius: 12px;
+      background: #ffffff1a;
+      padding: 8px;
+      overflow: hidden;
+    }
+  }
+
+  .divider {
+    margin-top: 24px;
+    background: #ffffff1a;
+    width: 44px;
+    height: 1px;
+  }
+
+  .menu2 {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    justify-content: center;
+    margin: 24px -1px 0px;
+    padding: 14px;
+    overflow: hidden;
+    row-gap: 16px;
+  }
+}
