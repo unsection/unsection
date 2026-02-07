@@ -1,12 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Image from 'next/image';
-
-interface Tab {
-  icon: string;
-  id: number;
-  alt: string;
-  label: string;
-}
+import type { Tab } from '@/app/types';
+import { SIDE_MENU_ITEMS } from '@/app/constants/navigation';
 
 interface MobileMenuOverlayProps {
   isMenuOpen: boolean;
@@ -15,71 +10,112 @@ interface MobileMenuOverlayProps {
   setActiveTab: (index: number) => void;
 }
 
-const MobileMenuOverlay: React.FC<MobileMenuOverlayProps> = ({ isMenuOpen, tabs, activeTab, setActiveTab }) => {
+/**
+ * Mobile Menu Overlay Component
+ * 
+ * Full-screen navigation overlay for mobile/tablet devices.
+ * Features:
+ * - Navigation tabs
+ * - Side menu items
+ * - Action buttons (Pricing, Login, Join)
+ * 
+ * Memoized to prevent unnecessary re-renders.
+ */
+const MobileMenuOverlay: React.FC<MobileMenuOverlayProps> = memo(({ 
+  isMenuOpen, 
+  tabs, 
+  activeTab, 
+  setActiveTab 
+}) => {
   if (!isMenuOpen) return null;
 
   return (
-    <div className="fixed inset-0 top-[78px] bg-black z-40 lg:hidden flex flex-col px-4 py-6 animate-in slide-in-from-top-5 fade-in duration-200 overflow-y-auto">
-      <div className="flex flex-col gap-6">
+    <div 
+      id="mobile-menu"
+      className="fixed inset-0 top-[78px] bg-black z-40 lg:hidden flex flex-col px-4 py-6 animate-in slide-in-from-top-5 fade-in duration-200 overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Navigation menu"
+    >
+      <nav className="flex flex-col gap-6">
         {/* Mobile Navigation Tabs */}
-        <div className="flex flex-col gap-4 border-b border-white/10 pb-6">
-          <div className="flex flex-wrap gap-4">
-            {tabs.map((tab, index) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(index)}
-                className={`flex items-center rounded-xl py-2 pl-2 pr-2.5 gap-2 transition-colors duration-200 ${
-                  activeTab === index 
-                    ? 'bg-white/10' 
-                    : 'bg-white/5 hover:bg-white/10'
-                }`}
-              >
-                <div className="w-6 h-6 relative shrink-0">
-                  <Image src={tab.icon} alt={tab.alt} fill />
-                </div>
-                <span className="text-white text-sm font-medium leading-[18px]">
-                  {tab.label}
-                </span>
-              </button>
-            ))}
+        <section className="flex flex-col gap-4 border-b border-white/10 pb-6">
+          <div className="flex flex-wrap gap-4" role="tablist">
+            {tabs.map((tab) => {
+              const isActive = activeTab === tab.id;
+              
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center rounded-xl py-2 pl-2 pr-2.5 gap-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/50 ${
+                    isActive 
+                      ? 'bg-white/10' 
+                      : 'bg-white/5 hover:bg-white/10'
+                  }`}
+                  role="tab"
+                  aria-selected={isActive}
+                >
+                  <div className="w-6 h-6 relative shrink-0">
+                    <Image 
+                      src={tab.icon} 
+                      alt="" 
+                      fill
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <span className="text-white text-sm font-medium leading-[18px]">
+                    {tab.label}
+                  </span>
+                </button>
+              );
+            })}
           </div>
-        </div>
+        </section>
 
         {/* Side Menu Items */}
-        <div className="flex flex-wrap gap-2 border-b border-white/10 pb-6">
-          {[
-            "Hero", "Testimonials", "Feature", "Call to actions", 
-            "Footer", "Blog", "Navbar", "Pricing", 
-            "Logo", "FAQs", "Team", "Contact", "Works"
-          ].map((item) => (
+        <section className="flex flex-wrap gap-2 border-b border-white/10 pb-6">
+          {SIDE_MENU_ITEMS.map((item) => (
             <button 
               key={item} 
-              className="flex items-center rounded-xl py-2 px-3 transition-colors duration-200 bg-white/5 hover:bg-white/10 text-white text-sm font-medium"
+              className="flex items-center rounded-xl py-2 px-3 transition-colors duration-200 bg-white/5 hover:bg-white/10 text-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-white/50"
             >
               {item}
             </button>
           ))}
-        </div>
+        </section>
 
         {/* Mobile Actions */}
-        <div className="flex flex-col gap-4 pb-20">
-          {/* Note: 'Pricing' is already included in the side menu list above, but kept here if it's a specific page link */}
-          <a href="#" className="text-white text-lg font-semibold py-2 hover:text-white/80 transition-colors">
+        <section className="flex flex-col gap-4 pb-20">
+          <a 
+            href="#" 
+            className="text-white text-lg font-semibold py-2 hover:text-white/80 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50 rounded"
+          >
             Pricing
           </a>
-          <a href="#" className="text-white text-lg font-semibold py-2 hover:text-white/80 transition-colors">
+          <a 
+            href="#" 
+            className="text-white text-lg font-semibold py-2 hover:text-white/80 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50 rounded"
+          >
             Login
           </a>
-          <button className="fixed bottom-0 left-0 right-0 flex items-center justify-center gap-2 bg-white py-6 w-full mt-2 hover:bg-gray-200 transition-colors z-50">
+          <button className="fixed bottom-0 left-0 right-0 flex items-center justify-center gap-2 bg-white py-6 w-full mt-2 hover:bg-gray-200 transition-colors z-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-black/50">
             <span className="text-black text-lg font-semibold">Join for free</span>
             <div className="w-6 h-6 relative">
-              <Image src="/images/mlb6tspn-8xadbtu.svg" alt="Arrow" fill />
+              <Image 
+                src="/images/mlb6tspn-8xadbtu.svg" 
+                alt="" 
+                fill
+                aria-hidden="true"
+              />
             </div>
           </button>
-        </div>
-      </div>
+        </section>
+      </nav>
     </div>
   );
-};
+});
+
+MobileMenuOverlay.displayName = 'MobileMenuOverlay';
 
 export default MobileMenuOverlay;
