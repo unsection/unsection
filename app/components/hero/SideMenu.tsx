@@ -14,7 +14,7 @@ const SideMenu: React.FC = memo(() => {
       className="hidden lg:flex absolute left-10 top-10 flex-col items-start gap-2 min-w-[200px] z-10 group"
       aria-label="Section categories"
     >
-      <ul className="flex flex-col gap-2">
+      <ul className="flex flex-col gap-1">
         {SIDE_MENU_ITEMS.map((item) => (
           <li key={item}>
             <button 

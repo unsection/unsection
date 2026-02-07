@@ -23,7 +23,7 @@ const HeroSection: React.FC = () => {
       <SideMenu />
 
       {/* Main Container */}
-      <div className="ml-0 lg:ml-[260px] relative z-0 flex flex-col items-center pt-10 px-4 lg:px-0">
+      <div className="ml-0 lg:ml-[260px] min-[1600px]:ml-0 relative z-0 flex flex-col items-center pt-10 px-4 lg:px-0">
         <div className="w-full max-w-[1106px] flex flex-col items-center">
           
           {/* Hero Top - Headline and Media */}
