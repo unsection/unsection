@@ -24,7 +24,7 @@ const Component = () => {
         <div className={styles.heroTop}>
           <div className={styles.headline2}>
             <p className={styles.headline}>
-              Discover curated website section design inspiration
+              Curated website section design inspiration
             </p>
             <p className={styles.subheadline}>
               Browse the best website section design examples — fresh ideas for your
