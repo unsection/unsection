@@ -38,7 +38,8 @@ const SectionCollections: React.FC = () => {
   // Reset state when source changes
   useEffect(() => {
     if (currentSourceRef.current !== source) {
-      setItems([]);
+      // Don't clear items immediately to prevent layout jump
+      // setItems([]); 
       setPage(1);
       setHasMore(true);
       loadingRef.current = false;
@@ -136,18 +137,39 @@ const SectionCollections: React.FC = () => {
             </div>
 
             {/* Content */}
-            <div className="flex items-center gap-3 py-2 mt-2">
-              <span className="text-white text-sm font-medium leading-[18px]">
-                {item.tag}
-              </span>
-              <span 
-                className="w-px h-3.5 bg-white/10" 
-                aria-hidden="true" 
-              />
-              <span className="text-white/60 text-sm font-medium leading-[18px] truncate">
-                {item.title}
-              </span>
-            </div>
+            {source === 'community' ? (
+              <div className="flex items-start gap-2 mt-2">
+                <div className="relative w-9 h-9 flex-shrink-0">
+                  <Image
+                    src={item.authorAvatar || '/images/designer_avatar.png'}
+                    alt={item.author || 'Designer'}
+                    fill
+                    className="rounded-full object-cover"
+                  />
+                </div>
+                <div className="flex flex-col gap-0.5 min-w-0">
+                  <p className="text-white text-sm font-medium leading-[18px]">
+                    {item.author || 'Marcel'}
+                  </p>
+                  <p className="text-white/60 text-sm font-medium leading-[18px] truncate">
+                    {item.title}
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center gap-3 py-2 mt-2">
+                <span className="text-white text-sm font-medium leading-[18px]">
+                  {item.tag}
+                </span>
+                <span 
+                  className="w-px h-3.5 bg-white/10" 
+                  aria-hidden="true" 
+                />
+                <span className="text-white/60 text-sm font-medium leading-[18px] truncate">
+                  {item.title}
+                </span>
+              </div>
+            )}
           </article>
         ))}
       </div>

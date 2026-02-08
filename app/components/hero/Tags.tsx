@@ -208,6 +208,11 @@ const Tags: React.FC = () => {
             }`}>
               Website
             </span>
+            <span className={`text-[13px] font-medium ${
+              activeSource === 'website' ? 'text-black/60' : 'text-white/60'
+            }`}>
+              128
+            </span>
           </button>
 
           <button 
@@ -223,6 +228,11 @@ const Tags: React.FC = () => {
               activeSource === 'community' ? 'text-black' : 'text-white/60'
             }`}>
               Community
+            </span>
+            <span className={`text-[13px] font-medium ${
+              activeSource === 'community' ? 'text-black/60' : 'text-white/60'
+            }`}>
+              64
             </span>
           </button>
 

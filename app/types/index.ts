@@ -22,6 +22,8 @@ export interface CollectionItem {
   isNew: boolean;
   thumbnail?: string;
   source?: 'website' | 'community';
+  author?: string;
+  authorAvatar?: string;
 }
 
 /**

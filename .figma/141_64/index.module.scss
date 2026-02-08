@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+}
+
+.designer {
+  display: inline-flex;
+  align-items: flex-start;
+  column-gap: 8px;
+  width: 194px;
+  height: 38px;
+
+  .ellipse1 {
+    flex-shrink: 0;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+  }
+
+  .designerInfo {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    align-items: flex-start;
+    row-gap: 2px;
+
+    .name {
+      flex-shrink: 0;
+      align-self: stretch;
+      letter-spacing: 0;
+      color: #ffffff;
+      font-family: Geist, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .description {
+      flex-shrink: 0;
+      align-self: stretch;
+      opacity: 0.6;
+      letter-spacing: 0;
+      color: #ffffff;
+      font-family: Geist, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+}

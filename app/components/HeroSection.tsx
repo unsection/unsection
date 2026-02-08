@@ -27,7 +27,7 @@ const HeroSection: React.FC = () => {
         <div className="w-full max-w-[1106px] flex flex-col items-center">
           
           {/* Hero Top - Headline and Media */}
-          <div className="flex flex-col lg:flex-row items-center lg:items-end self-stretch justify-between w-full gap-10 lg:gap-0">
+          <div className="flex flex-col lg:flex-row items-center lg:items-end self-stretch justify-between w-full gap-10">
             <HeroHeadline />
             <MediaSpot />
           </div>

@@ -17,3 +17,8 @@ export const CATEGORY_SLUGS: Record<string, string> = {
 export const getCategorySlug = (categoryName: string): string => {
   return CATEGORY_SLUGS[categoryName] || categoryName.toLowerCase().replace(/\s+/g, '-');
 };
+
+export const getCategoryName = (slug: string): string => {
+  const entry = Object.entries(CATEGORY_SLUGS).find(([_, s]) => s === slug);
+  return entry ? entry[0] : slug;
+};

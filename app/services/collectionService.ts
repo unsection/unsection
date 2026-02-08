@@ -3,14 +3,40 @@ import type { CollectionItem, PaginatedResponse } from '@/app/types';
 // Mock database with 100 items
 const TOTAL_ITEMS = 100;
 
-const MOCK_DB: CollectionItem[] = Array.from({ length: TOTAL_ITEMS }, (_, i) => ({
-  id: i + 1,
-  title: 'Flow Core Capabilities Feature Design',
-  tag: 'Feature',
-  isNew: i < 10, // Only first 10 items are "new"
-  thumbnail: '/images/mlc3xyh9-a5354c1.png',
-  source: i % 2 === 0 ? 'website' : 'community', // Alternate between website and community
-}));
+// Mock data arrays for more variety
+const DESIGNER_NAMES = [
+  'Marcel', 'Sarah', 'Alex', 'Jessica', 'David', 'Emma', 'Michael', 'Sophie'
+];
+
+const SECTION_TITLES = [
+  'Flow Core Capabilities Feature Design',
+  'User Dashboard Analytics View',
+  'E-commerce Product Gallery Layout',
+  'SaaS Pricing Table Comparison',
+  'Mobile App Navigation Patterns',
+  'Landing Page Hero Section',
+  'Authentication & Login Screens',
+  'UserProfile Settings Interface',
+  'Newsletter Subscription Modal',
+  'Footer Navigation Design'
+];
+
+const MOCK_DB: CollectionItem[] = Array.from({ length: TOTAL_ITEMS }, (_, i) => {
+  const isCommunity = i % 2 !== 0;
+  const designerName = DESIGNER_NAMES[i % DESIGNER_NAMES.length];
+  const title = SECTION_TITLES[i % SECTION_TITLES.length];
+  
+  return {
+    id: i + 1,
+    title: title,
+    tag: 'Feature',
+    isNew: i < 10, // Only first 10 items are "new"
+    thumbnail: '/images/mlc3xyh9-a5354c1.png',
+    source: isCommunity ? 'community' : 'website',
+    author: isCommunity ? designerName : undefined,
+    authorAvatar: isCommunity ? '/images/designer_avatar.png' : undefined,
+  };
+});
 
 /**
  * Simulates fetching collections from a backend API.
