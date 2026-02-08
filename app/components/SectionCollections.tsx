@@ -110,7 +110,7 @@ const SectionCollections: React.FC = () => {
       className="w-full bg-black flex flex-col items-center px-4 md:px-10 py-10 relative z-0"
       aria-label="Collections gallery"
     >
-      <div className="w-full max-w-[1440px] 2xl:max-w-[1920px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+      <div className="w-full max-w-[1440px] 2xl:max-w-[1920px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-x-4 gap-y-8">
         {items.map((item, index) => (
           <article 
             key={item.id}
