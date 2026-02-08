@@ -1,7 +1,9 @@
 import React, { memo } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import type { Tab } from '@/app/types';
 import { SIDE_MENU_ITEMS } from '@/app/constants/navigation';
+import { getCategorySlug } from '@/app/constants/categories';
 
 interface MobileMenuOverlayProps {
   isMenuOpen: boolean;
@@ -76,12 +78,13 @@ const MobileMenuOverlay: React.FC<MobileMenuOverlayProps> = memo(({
         {/* Side Menu Items */}
         <section className="flex flex-wrap gap-2 border-b border-white/10 pb-6">
           {SIDE_MENU_ITEMS.map((item) => (
-            <button 
+            <Link 
               key={item} 
+              href={`/category/${getCategorySlug(item)}`}
               className="flex items-center rounded-xl py-2 px-3 transition-colors duration-200 bg-white/5 hover:bg-white/10 text-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-white/50"
             >
               {item}
-            </button>
+            </Link>
           ))}
         </section>
 

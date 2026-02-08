@@ -16,7 +16,7 @@ import Tags from './hero/Tags';
 const HeroSection: React.FC = () => {
   return (
     <section 
-      className="relative w-full min-h-[680px] h-auto bg-black text-white overflow-hidden pb-10"
+      className="relative w-full h-auto bg-black text-white pb-4 z-10"
       aria-label="Hero section"
     >
       {/* Side Menu - Desktop only */}

@@ -57,6 +57,35 @@ export const FILTER_TAGS = [
 export type FilterTag = (typeof FILTER_TAGS)[number];
 
 /**
+ * Filter types for hero section
+ */
+export const TYPE_TAGS = [
+  "Community",
+  "Single Page",
+  "Personal",
+  "Web App",
+  "Mobile App",
+  "Physical Product",
+  "Agency",
+  "Service",
+  "Software",
+  "Resource",
+] as const;
+
+export type TypeTag = (typeof TYPE_TAGS)[number];
+
+/**
+ * Sort options for hero section
+ */
+export const SORT_OPTIONS = [
+  "Latest",
+  "Most Popular",
+  "Oldest",
+] as const;
+
+export type SortOption = (typeof SORT_OPTIONS)[number];
+
+/**
  * Pagination configuration
  */
 export const PAGINATION = {

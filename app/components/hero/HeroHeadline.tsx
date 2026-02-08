@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import Image from 'next/image';
+import Breadcrumb from './Breadcrumb';
 
 /**
  * Hero Headline Component
@@ -10,6 +11,7 @@ import Image from 'next/image';
 const HeroHeadline: React.FC = memo(() => {
   return (
     <div className="inline-flex flex-col flex-shrink-0 items-start gap-6 text-left">
+      <Breadcrumb />
       <h1 className="w-full lg:w-80 text-4xl leading-[41px] tracking-[-0.9px] text-white">
         Curated website section design inspiration
       </h1>

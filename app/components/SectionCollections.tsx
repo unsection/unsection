@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 import { fetchCollections } from '@/app/services/collectionService';
 import { PAGINATION } from '@/app/constants/navigation';
 import type { CollectionItem } from '@/app/types';
@@ -19,6 +20,9 @@ import type { CollectionItem } from '@/app/types';
  * - Reduced animation delays for better UX
  */
 const SectionCollections: React.FC = () => {
+  const searchParams = useSearchParams();
+  const source = (searchParams?.get('source') as 'website' | 'community') || 'website';
+  
   const [items, setItems] = useState<CollectionItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -29,8 +33,21 @@ const SectionCollections: React.FC = () => {
   const observerTarget = useRef<HTMLDivElement>(null);
   const loadingRef = useRef(false);
   const initialLoadDone = useRef(false);
+  const currentSourceRef = useRef(source);
 
-  const loadItems = useCallback(async (pageNum: number) => {
+  // Reset state when source changes
+  useEffect(() => {
+    if (currentSourceRef.current !== source) {
+      setItems([]);
+      setPage(1);
+      setHasMore(true);
+      loadingRef.current = false;
+      currentSourceRef.current = source;
+      loadItems(1, source);
+    }
+  }, [source]);
+
+  const loadItems = useCallback(async (pageNum: number, currentSource: 'website' | 'community' = source) => {
     // Use ref to check loading state to avoid stale closure issues
     if (loadingRef.current || (!hasMore && pageNum !== 1)) return;
 
@@ -41,7 +58,8 @@ const SectionCollections: React.FC = () => {
     try {
       const { data, hasMore: moreAvailable } = await fetchCollections(
         pageNum, 
-        PAGINATION.ITEMS_PER_PAGE
+        PAGINATION.ITEMS_PER_PAGE,
+        currentSource
       );
       
       setItems(prev => pageNum === 1 ? data : [...prev, ...data]);
@@ -53,15 +71,15 @@ const SectionCollections: React.FC = () => {
       loadingRef.current = false;
       setLoading(false);
     }
-  }, [hasMore]);
+  }, [hasMore, source]);
 
   // Initial load - runs once on mount
   useEffect(() => {
     if (!initialLoadDone.current) {
-      loadItems(1);
+      loadItems(1, source);
       initialLoadDone.current = true;
     }
-  }, [loadItems]);
+  }, [loadItems, source]);
 
   // Infinite scroll observer with proper cleanup
   useEffect(() => {
@@ -88,7 +106,7 @@ const SectionCollections: React.FC = () => {
 
   return (
     <section 
-      className="w-full bg-black flex flex-col items-center px-4 md:px-10 py-10"
+      className="w-full bg-black flex flex-col items-center px-4 md:px-10 py-10 relative z-0"
       aria-label="Collections gallery"
     >
       <div className="w-full max-w-[1440px] 2xl:max-w-[1920px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
