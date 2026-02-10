@@ -1,0 +1,204 @@
+* {
+  box-sizing: border-box;
+}
+
+.grid {
+  display: flex;
+  align-items: flex-start;
+  column-gap: 32px;
+  background: #000000;
+  padding: 40px 40px 41px;
+  width: 1440px;
+  height: 1262px;
+  overflow: hidden;
+
+  .rectangle1 {
+    flex-shrink: 0;
+    align-self: stretch;
+    background: #ffffff1a;
+    width: 1px;
+  }
+
+  .feature {
+    flex-shrink: 0;
+    line-height: 18px;
+    letter-spacing: 0;
+    color: #ffffff;
+    font-family: Geist, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    align-items: flex-start;
+    overflow: hidden;
+    row-gap: 16px;
+
+    .titleWrapper {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      align-self: stretch;
+      justify-content: space-between;
+      overflow: hidden;
+
+      .content {
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
+        column-gap: 12px;
+        overflow: hidden;
+
+        .flowCoreCapabilities {
+          flex-grow: 1;
+          opacity: 0.6;
+          letter-spacing: 0;
+          color: #ffffff;
+          font-family: Geist, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+          font-size: 14px;
+          font-weight: 500;
+        }
+      }
+
+      .actions {
+        display: inline-flex;
+        flex-shrink: 0;
+        align-items: center;
+        column-gap: 6px;
+
+        .smallAct {
+          display: inline-flex;
+          flex-shrink: 0;
+          align-items: center;
+          justify-content: center;
+          column-gap: 4px;
+          border-radius: 1000px;
+          background: #ffffff1a;
+          padding: 4px 10px;
+        }
+      }
+    }
+
+    .image {
+      flex-shrink: 0;
+      align-self: stretch;
+      width: 1068px;
+      height: 1059px;
+    }
+
+    .tags {
+      display: flex;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      align-items: flex-start;
+      align-self: stretch;
+      column-gap: 4px;
+      row-gap: 4px;
+
+      .tagStyle {
+        display: inline-flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        column-gap: 4px;
+        border-radius: 1000px;
+        background: #ffffff4d;
+        padding: 6px 12px;
+      }
+    }
+  }
+
+  .colRight {
+    display: inline-flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    align-items: center;
+    align-self: stretch;
+    padding-top: 42px;
+    padding-bottom: 42px;
+    overflow: hidden;
+    row-gap: 32px;
+
+    .style {
+      flex-shrink: 0;
+      opacity: 0.6;
+      line-height: 18px;
+      letter-spacing: 0;
+      color: #ffffff;
+      font-family: Geist, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .adBlock {
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      align-items: flex-start;
+      align-self: stretch;
+      row-gap: 8px;
+
+      .adThumb {
+        flex-shrink: 0;
+        align-self: stretch;
+        width: 260px;
+        height: 260px;
+      }
+
+      .content2 {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        align-self: stretch;
+        column-gap: 6px;
+        overflow: hidden;
+
+        .discoverRealWordDesi {
+          flex-shrink: 0;
+          opacity: 0.6;
+          line-height: 18px;
+          letter-spacing: 0;
+          color: #ffffff;
+          font-family: Geist, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+          font-size: 14px;
+          font-weight: 500;
+        }
+      }
+    }
+
+    .metaBlock {
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      align-items: flex-start;
+      align-self: stretch;
+      overflow: hidden;
+      row-gap: 8px;
+
+      .light {
+        flex-shrink: 0;
+        line-height: 18px;
+        letter-spacing: 0;
+        color: #ffffff;
+        font-family: Geist, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: underline;
+      }
+    }
+
+    .metaBlock2 {
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      align-items: flex-start;
+      align-self: stretch;
+      overflow: hidden;
+      row-gap: 8px;
+    }
+  }
+}
