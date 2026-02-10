@@ -3,9 +3,9 @@ import Image from 'next/image';
 
 const SectionDetails = () => {
   return (
-    <div className="flex flex-col lg:flex-row items-start gap-8 bg-black p-4 lg:p-10 w-full max-w-[1440px] mx-auto overflow-hidden text-white">
+    <div className="flex flex-col lg:flex-row items-start gap-6 lg:gap-8 bg-black p-4 lg:p-10 w-full mx-auto overflow-hidden text-white">
       {/* Left Column */}
-      <div className="flex flex-col shrink-0 items-start overflow-hidden gap-4 w-full lg:w-auto">
+      <div className="flex flex-col grow items-start overflow-hidden gap-4 w-full">
         
         {/* Title Wrapper */}
         <div className="flex shrink-0 items-center self-stretch justify-between overflow-hidden flex-wrap gap-4">
@@ -30,7 +30,7 @@ const SectionDetails = () => {
         </div>
 
         {/* Main Image */}
-        <div className="relative shrink-0 self-stretch w-full aspect-[1068/1059] lg:w-[1068px] lg:h-[1059px] bg-gray-900 rounded-lg overflow-hidden">
+        <div className="relative shrink-0 self-stretch w-full aspect-[1068/1059] bg-gray-900 rounded-lg overflow-hidden">
           <Image 
             src="/images/mlgyuulh-xfhrpqb.png" 
             alt="Feature Design" 
@@ -40,7 +40,7 @@ const SectionDetails = () => {
         </div>
 
         {/* Tags */}
-        <div className="flex shrink-0 flex-wrap content-start items-start self-stretch gap-1">
+        <div className="flex shrink-0 flex-wrap content-start items-start self-stretch gap-2">
           {['Office', 'Modern', 'Office', 'Flooring', 'Office', 'Chair', 'Desk', 'Setup', 'Interior', 'Table', 'Brick', 'Wall', 'Workspace', 'Brick', 'Printer', 'Wooden', 'Floc'].map((tag, index) => (
             <div key={index} className="inline-flex shrink-0 items-center justify-center gap-1 rounded-full bg-white/30 px-3 py-1.5 hover:bg-white/40 transition-colors cursor-pointer">
               <p className="leading-[18px] tracking-normal text-white font-medium text-sm">{tag}</p>
@@ -50,7 +50,7 @@ const SectionDetails = () => {
       </div>
 
       {/* Right Column */}
-      <div className="inline-flex flex-col shrink-0 items-start lg:items-center self-stretch lg:pt-[42px] lg:pb-[42px] overflow-hidden gap-8 w-full lg:w-[260px]">
+      <div className="flex flex-col shrink-0 items-start lg:items-center self-stretch lg:pt-[42px] lg:pb-[42px] overflow-hidden gap-6 lg:gap-8 w-full lg:w-[260px]">
         
         {/* Ad Block */}
         <div className="flex flex-col shrink-0 items-start self-stretch gap-2">
@@ -73,10 +73,10 @@ const SectionDetails = () => {
 
         {/* Meta Blocks */}
         <div className="flex flex-col shrink-0 items-start self-stretch overflow-hidden gap-2">
-          <p className="opacity-60 leading-[18px] tracking-normal text-white font-semibold text-sm">Style</p>
+          <p className="opacity-60 leading-[18px] tracking-normal text-white font-semibold text-sm lg:text-base">Style</p>
           <div className="flex flex-col items-start gap-1">
             {['Light', 'Card', 'Large Type', 'Bento', 'Image', 'Minimal'].map((item) => (
-              <p key={item} className="leading-[18px] tracking-normal text-white font-semibold text-sm underline decoration-white/30 underline-offset-4 cursor-pointer hover:text-white/80 transition-colors">
+              <p key={item} className="leading-[18px] tracking-normal text-white font-semibold text-sm lg:text-base underline decoration-white/30 underline-offset-4 cursor-pointer hover:text-white/80 transition-colors">
                 {item}
               </p>
             ))}
@@ -84,10 +84,10 @@ const SectionDetails = () => {
         </div>
 
         <div className="flex flex-col shrink-0 items-start self-stretch overflow-hidden gap-2">
-          <p className="opacity-60 leading-[18px] tracking-normal text-white font-semibold text-sm">Industry</p>
+          <p className="opacity-60 leading-[18px] tracking-normal text-white font-semibold text-sm lg:text-base">Industry</p>
           <div className="flex flex-col items-start gap-1">
             {['Technology', 'Software as a Service', 'Finance'].map((item) => (
-              <p key={item} className="leading-[18px] tracking-normal text-white font-semibold text-sm underline decoration-white/30 underline-offset-4 cursor-pointer hover:text-white/80 transition-colors">
+              <p key={item} className="leading-[18px] tracking-normal text-white font-semibold text-sm lg:text-base underline decoration-white/30 underline-offset-4 cursor-pointer hover:text-white/80 transition-colors">
                 {item}
               </p>
             ))}
@@ -95,10 +95,10 @@ const SectionDetails = () => {
         </div>
 
         <div className="flex flex-col shrink-0 items-start self-stretch overflow-hidden gap-2">
-          <p className="opacity-60 leading-[18px] tracking-normal text-white font-semibold text-sm">Type</p>
+          <p className="opacity-60 leading-[18px] tracking-normal text-white font-semibold text-sm lg:text-base">Type</p>
           <div className="flex flex-col items-start gap-1">
             {['Software', 'Web App'].map((item) => (
-              <p key={item} className="leading-[18px] tracking-normal text-white font-semibold text-sm underline decoration-white/30 underline-offset-4 cursor-pointer hover:text-white/80 transition-colors">
+              <p key={item} className="leading-[18px] tracking-normal text-white font-semibold text-sm lg:text-base underline decoration-white/30 underline-offset-4 cursor-pointer hover:text-white/80 transition-colors">
                 {item}
               </p>
             ))}
@@ -106,7 +106,7 @@ const SectionDetails = () => {
         </div>
 
         <div className="flex flex-col shrink-0 items-start self-stretch overflow-hidden gap-2">
-          <p className="opacity-60 leading-[18px] tracking-normal text-white font-semibold text-sm">Added</p>
+          <p className="opacity-60 leading-[18px] tracking-normal text-white font-semibold text-sm lg:text-base">Added</p>
           <p className="leading-[18px] tracking-normal text-white font-semibold text-sm">
             25.02.2025
           </p>
