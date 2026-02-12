@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback, memo, useRef, useEffect } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { FILTER_TAGS, TYPE_TAGS, SORT_OPTIONS, type FilterTag, type TypeTag, type SortOption } from '@/app/constants/navigation';
+import { SIDE_MENU_ITEMS, FILTER_TAGS, TYPE_TAGS, SORT_OPTIONS, type FilterTag, type TypeTag, type SortOption, type SideMenuItem } from '@/app/constants/navigation';
 
 /**
  * Individual tag button component
@@ -164,14 +164,35 @@ const Tags: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const isCategoryPage = pathname?.startsWith('/category/');
+  const isStylePage = pathname?.startsWith('/styles/');
   
   const [activeTag, setActiveTag] = useState<FilterTag | null>(null);
+  const [activeSection, setActiveSection] = useState<SideMenuItem | null>(null);
   const [activeType, setActiveType] = useState<TypeTag | null>(null);
   const [activeSort, setActiveSort] = useState<SortOption>('Latest');
   
   // Get active tab from URL, default to 'website'
   const activeSource = (searchParams?.get('source') as 'website' | 'community') || 'website';
   
+  // Initialize active tag from URL for style pages
+  useEffect(() => {
+    if (isStylePage) {
+      const styleSlug = pathname?.split('/styles/')[1];
+      if (styleSlug) {
+        // Convert slug to Title Case to match FILTER_TAGS
+        const styleName = styleSlug
+          .split('-')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
+        
+        // Only set if it's a valid tag
+        if (FILTER_TAGS.includes(styleName as FilterTag)) {
+          setActiveTag(styleName as FilterTag);
+        }
+      }
+    }
+  }, [pathname, isStylePage]);
+
   const handleSourceChange = useCallback((source: 'website' | 'community') => {
     const params = new URLSearchParams(searchParams?.toString());
     params.set('source', source);
@@ -179,7 +200,17 @@ const Tags: React.FC = () => {
   }, [pathname, router, searchParams]);
 
   const handleTagClick = useCallback((tag: string) => {
-    setActiveTag(prev => prev === tag ? null : tag as FilterTag);
+    if (isStylePage) {
+      // If on style page, navigate to new style page
+      const slug = tag.toLowerCase().replace(/\s+/g, '-');
+      router.push(`/styles/${slug}`);
+    } else {
+      setActiveTag(prev => prev === tag ? null : tag as FilterTag);
+    }
+  }, [isStylePage, router]);
+
+  const handleSectionClick = useCallback((section: string) => {
+    setActiveSection(prev => prev === section ? null : section as SideMenuItem);
   }, []);
 
   const handleTypeClick = useCallback((type: string) => {
@@ -190,7 +221,7 @@ const Tags: React.FC = () => {
     setActiveSort(sort as SortOption);
   }, []);
 
-  if (isCategoryPage) {
+  if (isCategoryPage || isStylePage) {
     return (
       <div className="relative mt-[60px] w-full max-w-[1106px] flex justify-between items-center z-20 h-[42px]">
         <div className="flex items-center gap-2">
@@ -239,15 +270,25 @@ const Tags: React.FC = () => {
           <div className="w-px h-6 bg-white/10 mx-2" aria-hidden="true" />
 
           <Dropdown 
-            label="Style" 
-            items={FILTER_TAGS} 
-            activeItem={activeTag} 
-            onSelect={handleTagClick}
+            label="Section" 
+            items={SIDE_MENU_ITEMS} 
+            activeItem={activeSection} 
+            onSelect={handleSectionClick}
             zIndex={30}
           />
 
+          {!isStylePage && (
+            <Dropdown 
+              label="Style"  
+              items={FILTER_TAGS} 
+              activeItem={activeTag} 
+              onSelect={handleTagClick}
+              zIndex={30}
+            />
+          )}
+
           <Dropdown 
-            label="Type" 
+            label="Type"  
             items={TYPE_TAGS} 
             activeItem={activeType} 
             onSelect={handleTypeClick}

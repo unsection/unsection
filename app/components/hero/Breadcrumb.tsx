@@ -8,10 +8,25 @@ import { getCategoryName } from '@/app/constants/categories';
 const Breadcrumb: React.FC = () => {
   const pathname = usePathname();
   const isCategoryPage = pathname?.startsWith('/category/');
-  const categorySlug = pathname?.split('/category/')[1];
-  const categoryName = categorySlug ? getCategoryName(categorySlug) : '';
+  const isStylePage = pathname?.startsWith('/styles/');
+  
+  if (!isCategoryPage && !isStylePage) return null;
 
-  if (!isCategoryPage) return null;
+  let displayName = '';
+
+  if (isCategoryPage) {
+    const categorySlug = pathname?.split('/category/')[1];
+    displayName = categorySlug ? getCategoryName(categorySlug) : '';
+  } else if (isStylePage) {
+    const styleSlug = pathname?.split('/styles/')[1];
+    if (styleSlug) {
+      // Convert slug to Title Case (e.g. "large-type" -> "Large Type")
+      displayName = styleSlug
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+    }
+  }
 
   return (
     <div className="flex items-center gap-2 text-white/60 mb-2">
@@ -34,7 +49,7 @@ const Breadcrumb: React.FC = () => {
         <path d="M20.33 12.75H3.5C3.09 12.75 2.75 12.41 2.75 12C2.75 11.59 3.09 11.25 3.5 11.25H20.33C20.74 11.25 21.08 11.59 21.08 12C21.08 12.41 20.74 12.75 20.33 12.75Z" fill="currentColor"/> 
       </svg>
 
-      <span className="text-[15px] font-medium text-white">{categoryName}</span>
+      <span className="text-[15px] font-medium text-white">{displayName}</span>
     </div>
   );
 };

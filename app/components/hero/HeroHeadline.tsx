@@ -15,12 +15,23 @@ import Breadcrumb from './Breadcrumb';
 const HeroHeadline: React.FC = memo(() => {
   const pathname = usePathname();
   const isCategoryPage = pathname?.startsWith('/category/');
-  const categorySlug = pathname?.split('/category/')[1];
-  const categoryName = categorySlug ? getCategoryName(categorySlug) : '';
+  const isStylePage = pathname?.startsWith('/styles/');
 
-  const title = isCategoryPage 
-    ? `Curated ${categoryName} section design inspiration`
-    : 'Curated website section design inspiration';
+  const categorySlug = isCategoryPage ? pathname?.split('/category/')[1] : '';
+  const styleSlug = isStylePage ? pathname?.split('/styles/')[1] : '';
+
+  const categoryName = categorySlug ? getCategoryName(categorySlug) : '';
+  // Convert slug to lowercase with spaces (e.g., "large-type" -> "large type")
+  const styleName = styleSlug 
+    ? styleSlug.replace(/-/g, ' ').toLowerCase()
+    : '';
+
+  let title = 'Curated website section design inspiration';
+  if (isCategoryPage) {
+    title = `Curated ${categoryName} section design inspiration`;
+  } else if (isStylePage) {
+    title = `Curated ${styleName} style design inspiration`;
+  }
 
   return (
     <div className="inline-flex flex-col flex-shrink-0 items-start gap-6 text-left">

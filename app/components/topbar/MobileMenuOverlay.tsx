@@ -45,19 +45,14 @@ const MobileMenuOverlay: React.FC<MobileMenuOverlayProps> = memo(({
           <div className="flex flex-wrap gap-4" role="tablist">
             {tabs.map((tab) => {
               const isActive = activeTab === tab.id;
-              
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center rounded-xl py-2 pl-2 pr-2.5 gap-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/50 ${
-                    isActive 
-                      ? 'bg-white/10' 
-                      : 'bg-white/5 hover:bg-white/10'
-                  }`}
-                  role="tab"
-                  aria-selected={isActive}
-                >
+              const className = `flex items-center rounded-xl py-2 pl-2 pr-2.5 gap-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/50 ${
+                isActive 
+                  ? 'bg-white/10' 
+                  : 'bg-white/5 hover:bg-white/10'
+              }`;
+
+              const content = (
+                <>
                   <div className="w-6 h-6 relative shrink-0">
                     <Image 
                       src={tab.icon} 
@@ -69,6 +64,33 @@ const MobileMenuOverlay: React.FC<MobileMenuOverlayProps> = memo(({
                   <span className="text-white text-sm font-medium leading-[18px]">
                     {tab.label}
                   </span>
+                </>
+              );
+
+              if (tab.href) {
+                return (
+                  <Link
+                    key={tab.id}
+                    href={tab.href}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={className}
+                    role="tab"
+                    aria-selected={isActive}
+                  >
+                    {content}
+                  </Link>
+                );
+              }
+              
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={className}
+                  role="tab"
+                  aria-selected={isActive}
+                >
+                  {content}
                 </button>
               );
             })}

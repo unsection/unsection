@@ -27,7 +27,7 @@ export type SideMenuItem = (typeof SIDE_MENU_ITEMS)[number];
  * Used in TopBar Tabs component
  */
 export const NAVIGATION_TABS: Tab[] = [
-  { icon: "/images/mlb6tspm-20uzgnr.svg", id: 0, alt: "Sections", label: "Sections" },
+  { icon: "/images/mlb6tspm-20uzgnr.svg", id: 0, alt: "Sections", label: "Sections", href: "/" },
   { icon: "/images/mlb6tspm-q4rawvd.svg", id: 1, alt: "Animations", label: "Animations" },
   { icon: "/images/mlb6tspm-rxd8tvz.svg", id: 2, alt: "Supply", label: "Supply" },
 ];
@@ -40,6 +40,7 @@ export const FILTER_TAGS = [
   "Uncommon",
   "Gradient",
   "Text Heavy",
+  "Large Type",
   "Light",
   "Flat Color",
   "Video",
@@ -52,6 +53,7 @@ export const FILTER_TAGS = [
   "Bento",
   "Visible Border",
   "Minimal",
+  "Image",
 ] as const;
 
 export type FilterTag = (typeof FILTER_TAGS)[number];

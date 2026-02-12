@@ -10,6 +10,7 @@ export interface Tab {
   id: number;
   alt: string;
   label: string;
+  href?: string;
 }
 
 /**

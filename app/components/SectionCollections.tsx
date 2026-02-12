@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { useSearchParams } from 'next/navigation';
+import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
+import { useSearchParams, usePathname } from 'next/navigation';
 import { fetchCollections } from '@/app/services/collectionService';
 import { PAGINATION } from '@/app/constants/navigation';
 import type { CollectionItem } from '@/app/types';
@@ -21,7 +21,17 @@ import CollectionCard from './CollectionCard';
  */
 const SectionCollections: React.FC = () => {
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const source = (searchParams?.get('source') as 'website' | 'community') || 'website';
+  
+  const isCategoryPage = pathname?.startsWith('/category/');
+  const isStylePage = pathname?.startsWith('/styles/');
+  
+  const filter = useMemo(() => isCategoryPage 
+    ? { type: 'category' as const, value: pathname.split('/category/')[1] }
+    : isStylePage
+    ? { type: 'style' as const, value: pathname.split('/styles/')[1] }
+    : undefined, [isCategoryPage, isStylePage, pathname]);
   
   const [items, setItems] = useState<CollectionItem[]>([]);
   const [loading, setLoading] = useState(false);
@@ -34,19 +44,7 @@ const SectionCollections: React.FC = () => {
   const loadingRef = useRef(false);
   const initialLoadDone = useRef(false);
   const currentSourceRef = useRef(source);
-
-  // Reset state when source changes
-  useEffect(() => {
-    if (currentSourceRef.current !== source) {
-      // Don't clear items immediately to prevent layout jump
-      // setItems([]); 
-      setPage(1);
-      setHasMore(true);
-      loadingRef.current = false;
-      currentSourceRef.current = source;
-      loadItems(1, source);
-    }
-  }, [source]);
+  const currentFilterRef = useRef(filter);
 
   const loadItems = useCallback(async (pageNum: number, currentSource: 'website' | 'community' = source) => {
     // Use ref to check loading state to avoid stale closure issues
@@ -60,7 +58,8 @@ const SectionCollections: React.FC = () => {
       const { data, hasMore: moreAvailable } = await fetchCollections(
         pageNum, 
         PAGINATION.ITEMS_PER_PAGE,
-        currentSource
+        currentSource,
+        filter
       );
       
       setItems(prev => pageNum === 1 ? data : [...prev, ...data]);
@@ -72,7 +71,22 @@ const SectionCollections: React.FC = () => {
       loadingRef.current = false;
       setLoading(false);
     }
-  }, [hasMore, source]);
+  }, [hasMore, source, filter]);
+
+  // Reset state when source or filter changes
+  useEffect(() => {
+    const filterChanged = JSON.stringify(currentFilterRef.current) !== JSON.stringify(filter);
+    if (currentSourceRef.current !== source || filterChanged) {
+      // Don't clear items immediately to prevent layout jump
+      // setItems([]); 
+      setPage(1);
+      setHasMore(true);
+      loadingRef.current = false;
+      currentSourceRef.current = source;
+      currentFilterRef.current = filter;
+      loadItems(1, source);
+    }
+  }, [source, filter, loadItems]);
 
   // Initial load - runs once on mount
   useEffect(() => {

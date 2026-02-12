@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import type { Tab } from '@/app/types';
 
 interface TabsProps {
@@ -22,18 +23,14 @@ const Tabs: React.FC<TabsProps> = memo(({ tabs, activeTab, setActiveTab }) => {
     >
       {tabs.map((tab) => {
         const isActive = activeTab === tab.id;
+        const className = `flex shrink-0 items-center rounded-xl py-2 pl-2 pr-2.5 gap-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/50 ${
+          isActive 
+            ? 'bg-white/10' 
+            : 'bg-transparent hover:bg-white/5'
+        }`;
         
-        return (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`flex shrink-0 items-center rounded-xl py-2 pl-2 pr-2.5 gap-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white/50 ${
-              isActive 
-                ? 'bg-white/10' 
-                : 'bg-transparent hover:bg-white/5'
-            }`}
-            aria-current={isActive ? 'page' : undefined}
-          >
+        const content = (
+          <>
             <div className="w-6 h-6 relative shrink-0">
               <Image 
                 src={tab.icon} 
@@ -45,6 +42,31 @@ const Tabs: React.FC<TabsProps> = memo(({ tabs, activeTab, setActiveTab }) => {
             <span className="text-white text-sm font-medium leading-[18px]">
               {tab.label}
             </span>
+          </>
+        );
+
+        if (tab.href) {
+          return (
+            <Link
+              key={tab.id}
+              href={tab.href}
+              className={className}
+              aria-current={isActive ? 'page' : undefined}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              {content}
+            </Link>
+          );
+        }
+        
+        return (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={className}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            {content}
           </button>
         );
       })}

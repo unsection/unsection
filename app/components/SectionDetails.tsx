@@ -1,5 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+
+const slugify = (text: string) => text.toLowerCase().replace(/\s+/g, '-');
 
 const SectionDetails = () => {
   return (
@@ -76,9 +79,13 @@ const SectionDetails = () => {
           <p className="opacity-60 leading-[18px] tracking-normal text-white font-semibold text-sm lg:text-base">Style</p>
           <div className="flex flex-col items-start gap-1">
             {['Light', 'Card', 'Large Type', 'Bento', 'Image', 'Minimal'].map((item) => (
-              <p key={item} className="leading-[18px] tracking-normal text-white font-semibold text-sm lg:text-base underline decoration-white/30 underline-offset-4 cursor-pointer hover:text-white/80 transition-colors">
+              <Link 
+                key={item} 
+                href={`/styles/${slugify(item)}`}
+                className="leading-[18px] tracking-normal text-white font-semibold text-sm lg:text-base underline decoration-white/30 underline-offset-4 cursor-pointer hover:text-white/80 transition-colors"
+              >
                 {item}
-              </p>
+              </Link>
             ))}
           </div>
         </div>

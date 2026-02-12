@@ -54,7 +54,8 @@ const MOCK_DB: CollectionItem[] = Array.from({ length: TOTAL_ITEMS }, (_, i) => 
 export const fetchCollections = async (
   page: number, 
   limit: number,
-  source?: 'website' | 'community'
+  source?: 'website' | 'community',
+  filter?: { type: 'category' | 'style', value: string }
 ): Promise<PaginatedResponse<CollectionItem>> => {
   // Simulate network delay (300-600ms for better UX)
   const delay = Math.floor(Math.random() * 300) + 300;
@@ -68,6 +69,18 @@ export const fetchCollections = async (
   let filteredData = MOCK_DB;
   if (source) {
     filteredData = MOCK_DB.filter(item => item.source === source);
+  }
+
+  // Apply category/style filter if present
+  if (filter) {
+    // In a real app, this would be a DB query.
+    // For mock data, we just return everything or filter if we had tags in the mock data.
+    // Currently MOCK_DB items have 'tag': 'Feature'.
+    if (filter.type === 'category') {
+      // filteredData = filteredData.filter(item => item.category === filter.value);
+    } else if (filter.type === 'style') {
+      // filteredData = filteredData.filter(item => item.style === filter.value);
+    }
   }
 
   const start = (page - 1) * limit;
