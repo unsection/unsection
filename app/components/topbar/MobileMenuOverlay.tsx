@@ -118,13 +118,16 @@ const MobileMenuOverlay: React.FC<MobileMenuOverlayProps> = memo(({
           >
             Pricing
           </a>
-          <a 
-            href="#" 
+          <Link 
+            href="/login" 
             className="text-white text-lg font-semibold py-2 hover:text-white/80 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50 rounded"
           >
             Login
-          </a>
-          <button className="fixed bottom-0 left-0 right-0 flex items-center justify-center gap-2 bg-white py-6 w-full mt-2 hover:bg-gray-200 transition-colors z-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-black/50">
+          </Link>
+          <Link 
+            href="/signup" 
+            className="fixed bottom-0 left-0 right-0 flex items-center justify-center gap-2 bg-white py-6 w-full mt-2 hover:bg-gray-200 transition-colors z-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-black/50"
+          >
             <span className="text-black text-lg font-semibold">Join for free</span>
             <div className="w-6 h-6 relative">
               <Image 
@@ -134,7 +137,7 @@ const MobileMenuOverlay: React.FC<MobileMenuOverlayProps> = memo(({
                 aria-hidden="true"
               />
             </div>
-          </button>
+          </Link>
         </section>
       </nav>
     </div>

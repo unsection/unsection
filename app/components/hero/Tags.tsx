@@ -269,13 +269,15 @@ const Tags: React.FC = () => {
 
           <div className="w-px h-6 bg-white/10 mx-2" aria-hidden="true" />
 
-          <Dropdown 
-            label="Section" 
-            items={SIDE_MENU_ITEMS} 
-            activeItem={activeSection} 
-            onSelect={handleSectionClick}
-            zIndex={30}
-          />
+          {isStylePage && (
+            <Dropdown 
+              label="Section" 
+              items={SIDE_MENU_ITEMS} 
+              activeItem={activeSection} 
+              onSelect={handleSectionClick}
+              zIndex={30}
+            />
+          )}
 
           {!isStylePage && (
             <Dropdown 

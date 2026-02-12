@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 /**
  * Action Buttons Component
@@ -10,20 +11,23 @@ import Image from 'next/image';
 const ActionButtons: React.FC = memo(() => {
   return (
     <div className="hidden lg:inline-flex shrink-0 items-center justify-end gap-7">
-      <a 
+      <Link 
         href="#" 
         className="text-white text-[15px] font-semibold hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-white/50 rounded px-1"
       >
         Pricing
-      </a>
-      <a 
-        href="#" 
+      </Link>
+      <Link 
+        href="/login" 
         className="text-white text-[15px] font-semibold hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-white/50 rounded px-1"
       >
         Login
-      </a>
+      </Link>
       
-      <button className="inline-flex shrink-0 items-center justify-center gap-1 rounded-full bg-white pl-4 pr-3 py-4 max-h-[44px] hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-white">
+      <Link 
+        href="/signup" 
+        className="inline-flex shrink-0 items-center justify-center gap-1 rounded-full bg-white pl-4 pr-3 py-4 max-h-[44px] hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-white"
+      >
         <span className="text-black text-[15px] font-semibold">Join for free</span>
         <div className="w-6 h-6 relative">
           <Image 
@@ -33,7 +37,7 @@ const ActionButtons: React.FC = memo(() => {
             aria-hidden="true"
           />
         </div>
-      </button>
+      </Link>
     </div>
   );
 });

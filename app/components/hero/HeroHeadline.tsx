@@ -26,7 +26,7 @@ const HeroHeadline: React.FC = memo(() => {
     ? styleSlug.replace(/-/g, ' ').toLowerCase()
     : '';
 
-  let title = 'Curated website section design inspiration';
+  let title = 'Section-first design inspiration';
   if (isCategoryPage) {
     title = `Curated ${categoryName} section design inspiration`;
   } else if (isStylePage) {
@@ -36,10 +36,10 @@ const HeroHeadline: React.FC = memo(() => {
   return (
     <div className="inline-flex flex-col flex-shrink-0 items-start gap-6 text-left">
       <Breadcrumb />
-      <h1 className="w-full lg:w-80 text-white">
+      <h1 className="w-full lg:w-[22rem] text-white">
         {title}
       </h1>
-      <p className="w-full lg:w-80 text-lg leading-[27px] text-white/60">
+      <p className="w-full lg:w-[22rem] text-lg leading-[27px] text-white/60">
         Browse the best website section design examples — fresh ideas for your next build.
       </p>
       
